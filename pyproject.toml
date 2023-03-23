@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "nwc-safer"
+version = "0.1.0"
+description = ""
+authors = ["dfotiou <fotioudimitris93@vodafone.com>"]
+readme = "README.md"
+packages = [{include = "nwc_safer"}]
+
+[tool.poetry.scripts]
+nwc-safer = "nwc_safer.cli:app"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+typer = {extras = ["all"], version = "^0.7.0"}
+watchdog = "^2.3.1"
+xarray = "^2023.2.0"
+netcdf4 = "^1.6.3"
+dask = "^2023.3.1"
+
+[tool.poetry.group.dev.dependencies]
+autopep8 = "^2.0.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
