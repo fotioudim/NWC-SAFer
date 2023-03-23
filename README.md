@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="docs/nwc-safer-logo.png" alt="logo" width="200" height="auto" />
+  <img src="docs/nwc-safer-logo.png" alt="logo" width="60%" height="auto" />
   <h1>NWC-SAFer</h1>
   
   <p>
@@ -74,6 +74,8 @@ The tech stack of this project consists of the following main technologies/frame
 ### :wrench: Prerequisites
 
 You just need to have installed Python language preferrably > 3.10 version and a Python package/dependency management tool like Pip, Poetry, Conda etc.
+
+The tool is compatible with all popular OS.
 
 <!-- Installation -->
 ### :gear: Installation
@@ -165,7 +167,4 @@ You can reach me at:
 - Personal website: https://www.dfotiou.gr
 - StackOverflow profile: https://stackoverflow.com/users/11680294/fotiou-d
 - Linkedin profile: https://www.linkedin.com/in/dimitris-fotiou-4141a8197/
-- Email: 
-<a href="mailto:webmaster@example.com">
-  fotioudimitris93@gmail.com
-</a>
+- Email: [fotioudimitris93@gmail.com](mailto:fotioudimitris93@gmail.com)
