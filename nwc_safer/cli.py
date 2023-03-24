@@ -1,22 +1,35 @@
 import typer
+import pkg_resources
 from pathlib import Path
 from rich import print
+from typing import List
+from typing import Optional
 from .watcher import Watcher
 from .processor import Processor
 from .product import Product
+from .error_panel import ErrorPanel
+
+
+app_version = pkg_resources.get_distribution('nwc-safer').version
+app = typer.Typer(no_args_is_help=True)
 
 
 def output_types():
     return ["csv", "xlsx", "txt"]
 
 
-app = typer.Typer(no_args_is_help=True)
-
+def version_callback(value: bool):
+    if value:
+        print(f"NWC-SAFer CLI Version: {app_version}")
+        raise typer.Exit()
+    
 
 @app.callback()
-def callback(ctx: typer.Context):
+def callback(ctx: typer.Context,
+             version: Optional[bool] = typer.Option(None, "--version", "-v", 
+                                                    help="Show the application version", callback=version_callback)):
     """
-    NWC-SAF NetCDF Data Exporter || CLI tool
+    NWC-SAFer CLI tool --> NWC-SAF NetCDF data exporting and conversion made simple!
     """
 
 
@@ -40,16 +53,21 @@ def watch(input_path: Path = typer.Argument(".", help="The path (relative/absolu
 
 
 @app.command()
-def convert(file_path: Path = typer.Argument(..., help="The path (relative/absolute) for the file desired to be converted",
+def convert(file_paths: List[Path] = typer.Argument(None, help="The path(s) (relative/absolute) for the file(s) desired to be converted",
                                              exists=True, dir_okay=False, resolve_path=True),
-            output_path: Path = typer.Argument(".\output\\", help="The path (relative/absolute) for the output directory",
+            output_path: Path = typer.Option(".\output\\", "--output", "-o", help="The path (relative/absolute) for the output directory",
                                                file_okay=False, resolve_path=True),
             output_format: str = typer.Option("csv", "--format", "-f", help="The output file format", autocompletion=output_types)):
     """
-    Process a single NWC-SAF NetCDF file, by extracting the desired data
+    Process a single or multiple NWC-SAF NetCDF file(s), by extracting the desired data
     and exporting them in a new file format (eg. Csv, Excel)
     """
-    Processor().convert(file_path, output_path, output_format)
+    if not file_paths:
+        print(ErrorPanel("Missing value for '[FILE_PATHS]...'!"))
+        raise typer.Exit(code=1)
+    
+    for file_path in file_paths:
+        Processor().convert(file_path, output_path, output_format)
 
 
 @app.command()

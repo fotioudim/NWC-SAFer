@@ -39,7 +39,7 @@
     - [:running: Run Locally](#running-run-locally)
   - [:bookmark\_tabs: Usage](#bookmark_tabs-usage)
     - [Watch directory and convert incoming files](#watch-directory-and-convert-incoming-files)
-    - [Single file conversion](#single-file-conversion)
+    - [Manual file conversion](#manual-file-conversion)
     - [Check compatible products](#check-compatible-products)
     - [Launch Github repository](#launch-github-repository)
   - [:compass: Roadmap](#compass-roadmap)
@@ -86,7 +86,7 @@ The tool is compatible with all popular OS.
   ```bash
     pip install --user nwc-safer
   ```
-- Having it installed globally (and not in a single environment), you can now install completion globally for it
+- Enable auto-completion by executing the following command
   ```bash
     nwc-safer --install-completion
   ```
@@ -129,15 +129,16 @@ Options:
 - `--recursive` `-r`: Watch for incoming files recursively in all the subdirectories of the specified directory
 - `--existing` `-e`: Convert pre-existing files in the specified directory
   
-### Single file conversion
-Process a single NetCDF file, by extracting the desired data
+### Manual file conversion
+Process a single or multiple NetCDF file(s), by extracting the desired data
 and exporting them in a new file format (eg. Csv, Excel).
 
 Arguments:
--  `file_path`: The path (relative/absolute) for the file desired to be converted [default: None] [required]
--  `output_path`: The path (relative/absolute) for the output directory [default: .\output\]
+-  `file_paths`: The path(s) (relative/absolute) for the file(s) desired to be converted [default: None] [required]
+
 
 Options:
+-  `--output` `-o`: The path (relative/absolute) for the output directory [default: .\output\]
 - `--format` `-f`: The output file format [default: csv]
   
 ### Check compatible products
@@ -158,7 +159,7 @@ Launch NWC-SAF NetCDF Data Exporter Github repository in the web browser
 * [x] Add continuous watching & conversion operation
 * [x] Single conversion operation
 * [x] OS agnostic functionality
-* [ ] Multiple conversion operation
+* [x] Multiple conversion operation
 * [ ] Generalize solution for a bigger set of [NWC SAF products](https://www.nwcsaf.org/web/guest/nwc/geo-geostationary-near-real-time-v2021) 
 
 <!-- License -->
