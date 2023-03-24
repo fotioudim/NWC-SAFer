@@ -40,6 +40,7 @@
   - [:bookmark\_tabs: Usage](#bookmark_tabs-usage)
     - [Watch directory and convert incoming files](#watch-directory-and-convert-incoming-files)
     - [Single file conversion](#single-file-conversion)
+    - [Check compatible products](#check-compatible-products)
     - [Launch Github repository](#launch-github-repository)
   - [:compass: Roadmap](#compass-roadmap)
   - [:warning: License](#warning-license)
@@ -139,6 +140,12 @@ Arguments:
 Options:
 - `--format` `-f`: The output file format [default: csv]
   
+### Check compatible products
+Check which NWC-SAF products are currently supported by the tool
+```bash
+  nwc-safer compatibility
+```
+
 ### Launch Github repository
 Launch NWC-SAF NetCDF Data Exporter Github repository in the web browser
 ```bash
