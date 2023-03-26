@@ -78,6 +78,8 @@ You just need to have installed Python language preferrably > 3.10 version and a
 
 The tool is compatible with all popular OS.
 
+_Better used along with CLIs that support emojis and Unicode characters for a better user experience._
+
 <!-- Installation -->
 ### :gear: Installation
 
