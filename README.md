@@ -125,6 +125,8 @@ Arguments:
 -  `output_path`: The path (relative/absolute) for the output directory [default: .\output\]
 
 Options:
+- `--lat` `-la`: The latitude coordinate range in ascending order, given in the form of two int values (min & max)
+- `--lon` `-lo`: The longitude coordinate range in ascending order, given in the form of two int values (min & max)
 - `--format` `-f`: The output file format [default: csv]
 - `--recursive` `-r`: Watch for incoming files recursively in all the subdirectories of the specified directory
 - `--existing` `-e`: Convert pre-existing files in the specified directory
@@ -136,9 +138,10 @@ and exporting them in a new file format (eg. Csv, Excel).
 Arguments:
 -  `file_paths`: The path(s) (relative/absolute) for the file(s) desired to be converted [default: None] [required]
 
-
 Options:
--  `--output` `-o`: The path (relative/absolute) for the output directory [default: .\output\]
+- `--lat` `-la`: The latitude coordinate range in ascending order, given in the form of two int values (min & max)
+- `--lon` `-lo`: The longitude coordinate range in ascending order, given in the form of two int values (min & max)
+- `--output` `-o`: The path (relative/absolute) for the output directory [default: .\output\]
 - `--format` `-f`: The output file format [default: csv]
   
 ### Check compatible products
@@ -160,6 +163,8 @@ Launch NWC-SAF NetCDF Data Exporter Github repository in the web browser
 * [x] Single conversion operation
 * [x] OS agnostic functionality
 * [x] Multiple conversion operation
+* [x] Subset dataset based on coordinates range
+* [x] Support 3 output file formats (.csv, .xlsx, txt)
 * [ ] Generalize solution for a bigger set of [NWC SAF products](https://www.nwcsaf.org/web/guest/nwc/geo-geostationary-near-real-time-v2021) 
 
 <!-- License -->

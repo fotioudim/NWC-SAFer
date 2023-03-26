@@ -1,11 +1,21 @@
 import unittest
 from typer.testing import CliRunner
 from nwc_safer.cli import app
+import os.path
+import shutil
 
 runner = CliRunner()
 
 class TestCli(unittest.TestCase):
-    
+
+    OUTPUT_FOLDER = ".\output\\"
+    @classmethod
+    def setUpClass(cls):
+        if (os.path.isdir(cls.OUTPUT_FOLDER)):
+            print("Delete test output folder if exists beforehand")
+            shutil.rmtree(cls.OUTPUT_FOLDER)
+
+
     def test_app(self):
         result = runner.invoke(app)
         self.assertEqual(result.exit_code, 0)
@@ -22,9 +32,19 @@ class TestCli(unittest.TestCase):
         self.assertTrue("NWC GEO Cloud Type Product" in result.stdout)
         self.assertTrue("NWC GEO Cloud Mask Product" in result.stdout)
 
+    def test_watch_wrong_output(self):
+        result = runner.invoke(app, ["watch", "-f", "test"])
+        self.assertEqual(result.exit_code, 2)
+        self.assertTrue("Invalid value for '--format' / '-f': Only csv, xlsx, txt file formats are allowed" in result.stdout)
+
+    def test_conversion_wrong_output(self):
+        result = runner.invoke(app, ["convert", "-f", "test"])
+        self.assertEqual(result.exit_code, 2)
+        self.assertTrue("Invalid value for '--format' / '-f': Only csv, xlsx, txt file formats are allowed" in result.stdout)
+
     def test_conversion_no_file_path(self):
         result = runner.invoke(app, ["convert"])
-        self.assertEqual(result.exit_code, 1)
+        self.assertEqual(result.exit_code, 2)
         self.assertTrue("Missing value for '[FILE_PATHS]...'!" in result.stdout)
 
     def test_conversion_file_path_not_exists(self):
@@ -37,4 +57,21 @@ class TestCli(unittest.TestCase):
         self.assertEqual(result.exit_code, 2)
         self.assertTrue("Invalid value for '[FILE_PATHS]...': File '.' is a directory." in result.stdout)
 
-    
+    def test_conversion_file_path_cma_csv_success(self):
+        filename = "S_NWC_CMA_MSG4_MSG-N-VISIR_20230313T093000Z"
+        result = runner.invoke(app, ["convert", f"./resources/{filename}.nc"])
+        self.assertTrue(os.path.isfile(f"./output/{filename}.csv"))
+        self.assertEqual(result.exit_code, 0)
+
+    def test_conversion_file_path_ct_csv_success(self):
+        filename = "S_NWC_CT_MSG4_MSG-N-VISIR_20230313T094500Z"
+        result = runner.invoke(app, ["convert", f"./resources/{filename}.nc"])
+        self.assertTrue(os.path.isfile(f"./output/{filename}.csv"))
+        self.assertEqual(result.exit_code, 0)
+
+
+    @classmethod
+    def tearDownClass(cls):
+        print("Delete test output folder after test comnpletion")
+        shutil.rmtree(cls.OUTPUT_FOLDER)
+

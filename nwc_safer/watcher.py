@@ -5,11 +5,13 @@ from threading import Thread
 from rich.progress import Progress, SpinnerColumn, TextColumn
 from .filehandler import FileHandler
 from .processor import Processor
+from typing import Tuple
 
 
 class Watcher:
 
-    def __init__(self, input_path: str, output_path: str, export: str, recursive: bool, existing: bool):
+    def __init__(self, input_path: str, output_path: str, export: str, recursive: bool, existing: bool,
+                 lat_bounds: Tuple[int, int] | None, lon_bounds: Tuple[int, int] | None):
         self.observer = Observer()
         self.queue = Queue()
         self.file_handler = FileHandler(self.queue, input_path, recursive)
@@ -19,11 +21,14 @@ class Watcher:
         self.export = export
         self.recursive = recursive
         self.existing = existing
+        self.lat_bounds = lat_bounds
+        self.lon_bounds = lon_bounds
 
     def run(self):
 
         # Set up a worker thread to process the queue of observed files
-        worker = Thread(target=self.processor.process_load_queue, args=(self.output_path, self.export))
+        worker = Thread(target=self.processor.process_load_queue, 
+                        args=(self.output_path, self.export, self.lat_bounds, self.lon_bounds))
         worker.setDaemon(True)
         worker.start()
 

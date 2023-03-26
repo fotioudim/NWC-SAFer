@@ -2,6 +2,7 @@ from pathlib import Path
 from queue import Queue
 import xarray as xr
 import pandas as pd
+from typing import Tuple
 import time
 import os
 from rich import print
@@ -14,19 +15,22 @@ class Processor:
         if len(args) > 0 and isinstance(args[0], Queue):
             self.queue = args[0]
 
-    def process_load_queue(self, output_path: str, export: str):
+    def process_load_queue(self, output_path: str, export: str,
+                           lat_bounds: Tuple[int, int] | None, lon_bounds: Tuple[int, int] | None):
         while True:
             if not self.queue.empty():
                 event = self.queue.get()
                 filename = event.src_path
-                self.convert(filename, output_path, export)
+                self.convert(filename, output_path, export, lat_bounds, lon_bounds)
             else:
                 time.sleep(3)
 
-    def convert(self, filename: str, output_path: str, export: str):
+    def convert(self, filename: str, output_path: str, export: str, 
+                lat_bounds: Tuple[int, int] | None, lon_bounds: Tuple[int, int] | None):
         print(":construction: [bright_yellow]Started[/bright_yellow] data processing for file:", filename)
 
-        ds = xr.open_dataset(filename, chunks={'time': 10})
+        ds = xr.open_dataset(filename, chunks={'time': 10}) \
+            .sortby("ny", "nx").sel(ny=slice(*lat_bounds), nx=slice(*lon_bounds))
         product = ds.attrs['title']
         Path(output_path).mkdir(parents=True, exist_ok=True)
         output_filename = os.path.join(output_path, f"{Path(filename).stem}.{export}")
@@ -48,6 +52,6 @@ class Processor:
             final_df.to_csv(output_filename)
         elif (export == "txt"):
             final_df.to_string(output_filename)
-        elif (export == "excel"):
+        elif (export == "xlsx"):
             final_df.to_excel(output_filename)
         print(":heavy_check_mark: [green]Completed[/green] data conversion for file:", output_filename)
