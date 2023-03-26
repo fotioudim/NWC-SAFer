@@ -134,6 +134,9 @@ Options:
 ### Manual file conversion
 Process a single or multiple NetCDF file(s), by extracting the desired data
 and exporting them in a new file format (eg. Csv, Excel).
+```bash
+  nwc-safer convert [OPTIONS] [FILE_PATHS]...
+```
 
 Arguments:
 -  `file_paths`: The path(s) (relative/absolute) for the file(s) desired to be converted [default: None] [required]
