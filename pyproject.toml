@@ -1,9 +1,13 @@
 [tool.poetry]
 name = "nwc-safer"
-version = "0.2.0"
-description = ""
+version = "0.3.0"
+description = "NWC-SAFer CLI tool simplifying NetCDF data extraction and conversion of NWC-SAF products."
 authors = ["dfotiou <fotioudimitris93@vodafone.com>"]
 readme = "README.md"
+license = "MIT"
+repository = "https://github.com/fotioudim/NWC-SAFer"
+keywords = ["nwc-saf", "netcdf", "typer", "python", "poetry", "watchdog"]
+classifiers = ["Topic :: Software Development :: Libraries :: Python Modules"]
 packages = [{include = "nwc_safer"}]
 
 [tool.poetry.scripts]
