@@ -1,5 +1,4 @@
 import typer
-import pkg_resources
 from pathlib import Path
 from rich import print
 from typing import List, Tuple
@@ -7,25 +6,34 @@ from typing import Optional
 from .watcher import Watcher
 from .processor import Processor
 from .product import Product
+from importlib.metadata import version  
 
 
-app_version = pkg_resources.get_distribution('nwc-safer').version
 app = typer.Typer(no_args_is_help=True)
 
 
 def file_format_types():
+    """
+    Supported output file formats by the application
+    """
     return ["csv", "xlsx", "txt"]
 
 
 def file_format_callback(value: str):
+    """
+    Check if the option parameter provided is amongst the supported output file formats
+    """
     if value not in file_format_types():
         raise typer.BadParameter(f"Only {', '.join(file_format_types())} file formats are allowed!")
     return value
 
 
 def version_callback(value: bool):
+    """
+    Print the application version in the console
+    """
     if value:
-        print(f"NWC-SAFer CLI Version: {app_version}")
+        print(f"NWC-SAFer CLI Version: {version('nwc-safer')}")
         raise typer.Exit()
     
 

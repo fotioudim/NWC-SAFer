@@ -1,13 +1,15 @@
 [tool.poetry]
 name = "nwc-safer"
-version = "0.4.0"
+version = "0.8.0"
 description = "NWC-SAFer CLI tool simplifying NetCDF data extraction and conversion of NWC-SAF products."
 authors = ["dfotiou <fotioudimitris93@vodafone.com>"]
-readme = "README.md"
+readme = "docs/README_pypi.md"
 license = "MIT"
 repository = "https://github.com/fotioudim/NWC-SAFer"
 keywords = ["nwc-saf", "netcdf", "typer", "python", "poetry", "watchdog"]
-classifiers = ["Topic :: Software Development :: Libraries :: Python Modules"]
+classifiers = [
+    "Topic :: Scientific/Engineering :: Image Processing",
+    "Topic :: Software Development :: Libraries :: Python Modules"]
 packages = [{include = "nwc_safer"}]
 
 [tool.poetry.scripts]
@@ -21,12 +23,17 @@ xarray = "^2023.2.0"
 netcdf4 = "^1.6.3"
 dask = "^2023.3.1"
 openpyxl = "^3.1.2"
+setuptools = "^67.6.0"
 
 [tool.poetry.group.dev.dependencies]
 autopep8 = "^2.0.2"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.2.2"
+
+[tool.poetry.build]
+generate-setup-file = false
+script = "docs/demoji.py"
 
 [build-system]
 requires = ["poetry-core"]

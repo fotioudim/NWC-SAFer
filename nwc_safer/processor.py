@@ -10,13 +10,28 @@ from .product import Product
 
 
 class Processor:
+    """
+    Processor class is responsible for getting and poping files stored in the process queue,
+    extracting data depending on the specific NWC-SAF product and tranforming 
+    them to the desired output file format
+    """
+ 
 
     def __init__(self, *args):
+        """
+        Processor constructor able to construct Processor instance 
+        with and without a queue available
+        """
         if len(args) > 0 and isinstance(args[0], Queue):
             self.queue = args[0]
 
+
     def process_load_queue(self, output_path: str, export: str,
                            lat_bounds: Tuple[int, int] | None, lon_bounds: Tuple[int, int] | None):
+        """
+        Continuously check if there are available files for processing
+        in the queue
+        """
         while True:
             if not self.queue.empty():
                 event = self.queue.get()
@@ -25,8 +40,13 @@ class Processor:
             else:
                 time.sleep(3)
 
+
     def convert(self, filename: str, output_path: str, export: str, 
                 lat_bounds: Tuple[int, int] | None, lon_bounds: Tuple[int, int] | None):
+        """
+        Extract data  from a NetCDF file depending on the specific NWC-SAF product and convert 
+        them to the desired output file format
+        """
         print(":construction: [bright_yellow]Started[/bright_yellow] data processing for file:", filename)
 
         ds = xr.open_dataset(filename, chunks={'time': 10}) \

@@ -2,3 +2,4 @@
 /dist
 **/output
 **.aux.xml
+**/pytest_cache

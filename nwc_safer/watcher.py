@@ -9,9 +9,17 @@ from typing import Tuple
 
 
 class Watcher:
+    """
+    Watcher class is responsible for directory observation 
+    for incoming NetCDF files
+    """
+
 
     def __init__(self, input_path: str, output_path: str, export: str, recursive: bool, existing: bool,
                  lat_bounds: Tuple[int, int] | None, lon_bounds: Tuple[int, int] | None):
+        """
+        Watcher constructor
+        """
         self.observer = Observer()
         self.queue = Queue()
         self.file_handler = FileHandler(self.queue, input_path, recursive)
@@ -24,8 +32,11 @@ class Watcher:
         self.lat_bounds = lat_bounds
         self.lon_bounds = lon_bounds
 
-    def run(self):
 
+    def run(self):
+        """
+        Start watching a directory for NetCDF files
+        """
         # Set up a worker thread to process the queue of observed files
         worker = Thread(target=self.processor.process_load_queue, 
                         args=(self.output_path, self.export, self.lat_bounds, self.lon_bounds))
