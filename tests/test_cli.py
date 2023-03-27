@@ -1,77 +1,74 @@
-import unittest
 from typer.testing import CliRunner
 from nwc_safer.cli import app
 import os.path
 import shutil
+import pytest
 
 runner = CliRunner()
 
-class TestCli(unittest.TestCase):
 
-    OUTPUT_FOLDER = ".\output\\"
-    @classmethod
-    def setUpClass(cls):
-        if (os.path.isdir(cls.OUTPUT_FOLDER)):
-            print("Delete test output folder if exists beforehand")
-            shutil.rmtree(cls.OUTPUT_FOLDER)
+RESOURCES_DIRECTORY = ".\\resources\\"
+OUTPUT_DIRECTORY = ".\\output\\"
 
 
-    def test_app(self):
-        result = runner.invoke(app)
-        self.assertEqual(result.exit_code, 0)
-        self.assertTrue("NWC-SAFer CLI tool --> NWC-SAF NetCDF data exporting and conversion made simple!" in result.stdout)
-
-    def test_version(self):
-        result = runner.invoke(app, ["--version"])
-        self.assertEqual(result.exit_code, 0)
-        self.assertTrue("0.1.0" in result.stdout)
-
-    def test_compatibility(self):
-        result = runner.invoke(app, ["compatibility"])
-        self.assertEqual(result.exit_code, 0)
-        self.assertTrue("NWC GEO Cloud Type Product" in result.stdout)
-        self.assertTrue("NWC GEO Cloud Mask Product" in result.stdout)
-
-    def test_watch_wrong_output(self):
-        result = runner.invoke(app, ["watch", "-f", "test"])
-        self.assertEqual(result.exit_code, 2)
-        self.assertTrue("Invalid value for '--format' / '-f': Only csv, xlsx, txt file formats are allowed" in result.stdout)
-
-    def test_conversion_wrong_output(self):
-        result = runner.invoke(app, ["convert", "-f", "test"])
-        self.assertEqual(result.exit_code, 2)
-        self.assertTrue("Invalid value for '--format' / '-f': Only csv, xlsx, txt file formats are allowed" in result.stdout)
-
-    def test_conversion_no_file_path(self):
-        result = runner.invoke(app, ["convert"])
-        self.assertEqual(result.exit_code, 2)
-        self.assertTrue("Missing value for '[FILE_PATHS]...'!" in result.stdout)
-
-    def test_conversion_file_path_not_exists(self):
-        result = runner.invoke(app, ["convert", "test.nc"])
-        self.assertEqual(result.exit_code, 1)
-        self.assertTrue("Invalid value for '[FILE_PATHS]...': File 'sda' does not exist." in result.stdout)
-
-    def test_conversion_file_path_not_exists(self):
-        result = runner.invoke(app, ["convert", "."])
-        self.assertEqual(result.exit_code, 2)
-        self.assertTrue("Invalid value for '[FILE_PATHS]...': File '.' is a directory." in result.stdout)
-
-    def test_conversion_file_path_cma_csv_success(self):
-        filename = "S_NWC_CMA_MSG4_MSG-N-VISIR_20230313T093000Z"
-        result = runner.invoke(app, ["convert", f"./resources/{filename}.nc"])
-        self.assertTrue(os.path.isfile(f"./output/{filename}.csv"))
-        self.assertEqual(result.exit_code, 0)
-
-    def test_conversion_file_path_ct_csv_success(self):
-        filename = "S_NWC_CT_MSG4_MSG-N-VISIR_20230313T094500Z"
-        result = runner.invoke(app, ["convert", f"./resources/{filename}.nc"])
-        self.assertTrue(os.path.isfile(f"./output/{filename}.csv"))
-        self.assertEqual(result.exit_code, 0)
+@pytest.fixture(scope="session", autouse=True)
+def image_file():
+    if os.path.isdir(OUTPUT_DIRECTORY):
+        shutil.rmtree(OUTPUT_DIRECTORY)
+    yield
+    if os.path.isdir(OUTPUT_DIRECTORY):
+        shutil.rmtree(OUTPUT_DIRECTORY)
 
 
-    @classmethod
-    def tearDownClass(cls):
-        print("Delete test output folder after test comnpletion")
-        shutil.rmtree(cls.OUTPUT_FOLDER)
+def test_app():
+    result = runner.invoke(app)
+    assert result.exit_code == 0
+    assert "NWC-SAFer CLI tool --> NWC-SAF NetCDF data exporting and conversion made simple!" in result.stdout
 
+def test_version():
+    result = runner.invoke(app, ["--version"])
+    assert result.exit_code == 0
+    assert "0.3.0" in result.stdout
+
+def test_compatibility():
+    result = runner.invoke(app, ["compatibility"])
+    assert result.exit_code == 0
+    assert "NWC GEO Cloud Type Product" in result.stdout
+    assert "NWC GEO Cloud Mask Product" in result.stdout
+
+def test_watch_wrong_output():
+    result = runner.invoke(app, ["watch", "-f", "test"])
+    assert result.exit_code == 2
+    assert "Invalid value for '--format' / '-f': Only csv, xlsx, txt file formats are allowed" in result.stdout
+
+def test_conversion_wrong_output():
+    result = runner.invoke(app, ["convert", "-f", "test"])
+    assert result.exit_code == 2
+    assert "Invalid value for '--format' / '-f': Only csv, xlsx, txt file formats are allowed" in result.stdout
+
+def test_conversion_no_file_path():
+    result = runner.invoke(app, ["convert"])
+    assert result.exit_code == 2
+    assert "Missing value for '[FILE_PATHS]...'!" in result.stdout
+
+def test_conversion_file_path_not_exists():
+    result = runner.invoke(app, ["convert", "test.nc"])
+    assert result.exit_code == 1
+    assert "Invalid value for '[FILE_PATHS]...': File 'sda' does not exist." in result.stdout
+
+def test_conversion_file_path_not_exists():
+    result = runner.invoke(app, ["convert", "."])
+    assert result.exit_code == 2
+    assert "Invalid value for '[FILE_PATHS]...': File '.' is a directory." in result.stdout
+
+def test_conversion_file_path_cma_csv_success():
+    filename = "S_NWC_CMA_MSG4_MSG-N-VISIR_20230313T093000Z"
+    result = runner.invoke(app, ["convert", f"{RESOURCES_DIRECTORY + filename}.nc"])
+    assert os.path.isfile(f"{OUTPUT_DIRECTORY + filename}.csv")
+    assert result.exit_code == 0
+
+def test_conversion_file_path_ct_csv_success():
+    filename = "S_NWC_CT_MSG4_MSG-N-VISIR_20230313T094500Z"
+    result = runner.invoke(app, ["convert", f"{RESOURCES_DIRECTORY + filename}.nc"])
+    assert os.path.isfile(f"{OUTPUT_DIRECTORY + filename}.csv")
+    assert result.exit_code == 0

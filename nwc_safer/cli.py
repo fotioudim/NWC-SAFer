@@ -41,7 +41,7 @@ def callback(ctx: typer.Context,
 @app.command()
 def watch(input_path: Path = typer.Argument(".", help="The path (relative/absolute) for the directory desired to be watched",
                                             exists=True, file_okay=False, resolve_path=True),
-          output_path: Path = typer.Argument(".\output\\", help="The path (relative/absolute) for the output directory",
+          output_path: Path = typer.Argument(".\\output\\", help="The path (relative/absolute) for the output directory",
                                              file_okay=False, resolve_path=True),
           lat_bounds: Tuple[int, int] = typer.Option((None, None), "--lat", "-la", 
                                 help="The latitude coordinate range in ascending order, given in the form of two int values (min & max)"),
@@ -65,7 +65,7 @@ def watch(input_path: Path = typer.Argument(".", help="The path (relative/absolu
 @app.command()
 def convert(file_paths: List[Path] = typer.Argument(None, help="The path(s) (relative/absolute) for the file(s) desired to be converted",
                                              exists=True, dir_okay=False, resolve_path=True),
-            output_path: Path = typer.Option(".\output\\", "--output", "-o", help="The path (relative/absolute) for the output directory",
+            output_path: Path = typer.Option(".\\output\\", "--output", "-o", help="The path (relative/absolute) for the output directory",
                                                file_okay=False, resolve_path=True),
             lat_bounds: Tuple[int, int] = typer.Option((None, None), "--lat", "-la", 
                                 help="The latitude coordinate range in ascending order, given in the form of two int values (min & max)"),
@@ -97,6 +97,5 @@ def repo():
     """
     Launch NWC-SAF NetCDF Data Exporter Github repository
     """
-    print(
-        ":rocket: [bright_cyan]Launched[/bright_cyan] NWC-SAF NetCDF Data Exporter Github repository")
+    print(":rocket: [bright_cyan]Launched[/bright_cyan] NWC-SAF NetCDF Data Exporter Github repository")
     typer.launch("https://github.com/fotioudim/nwc-safer")

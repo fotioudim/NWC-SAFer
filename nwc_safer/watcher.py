@@ -33,7 +33,7 @@ class Watcher:
         worker.start()
 
         # Retrieve pre-existing files 
-        if (self.existing):
+        if self.existing:
             self.file_handler.load_existing_nc_files()
 
         self.observer.schedule(self.file_handler, self.input_path, self.recursive)

@@ -48,10 +48,10 @@ class Processor:
         else:
             print(f":x: [red]Failed[/red] data conversion. Product type '{product}' is not supported yet.")
 
-        if (export == "csv"):
+        if export == "csv":
             final_df.to_csv(output_filename)
-        elif (export == "txt"):
+        elif export == "txt":
             final_df.to_string(output_filename)
-        elif (export == "xlsx"):
+        elif export == "xlsx":
             final_df.to_excel(output_filename)
         print(":heavy_check_mark: [green]Completed[/green] data conversion for file:", output_filename)

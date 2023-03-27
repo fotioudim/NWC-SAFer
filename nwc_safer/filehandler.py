@@ -18,7 +18,7 @@ class FileHandler(PatternMatchingEventHandler):
         self.queue.put(event)
 
     def load_existing_nc_files(self):
-        if (self.recursive):
+        if self.recursive:
             for root, dirs, files in os.walk(self.input_path):
                 self.search_nc_in_file_list(root, files)
         else:
