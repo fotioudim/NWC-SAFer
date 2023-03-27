@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="docs/nwc-safer-logo.png" alt="logo" width="60%" height="auto" />
+  <img src="https://raw.githubusercontent.com/fotioudim/NWC-SAFer/main/docs/nwc-safer-logo.png" alt="logo" width="60%" height="auto" />
   <h1>NWC-SAFer</h1>
   
   <p>
