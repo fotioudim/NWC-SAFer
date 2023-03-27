@@ -3,12 +3,14 @@ from nwc_safer.cli import app
 import os.path
 import shutil
 import pytest
+from pathlib import Path
 
 runner = CliRunner()
 
 
-RESOURCES_DIRECTORY = ".\\resources\\"
-OUTPUT_DIRECTORY = ".\\output\\"
+TEST_DIR = os.path.dirname(os.path.abspath(__file__))
+RESOURCES_DIRECTORY =  Path(TEST_DIR) / "resources"
+OUTPUT_DIRECTORY = Path(".\\output\\")
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -63,12 +65,12 @@ def test_conversion_file_path_not_exists():
 
 def test_conversion_file_path_cma_csv_success():
     filename = "S_NWC_CMA_MSG4_MSG-N-VISIR_20230313T093000Z"
-    result = runner.invoke(app, ["convert", f"{RESOURCES_DIRECTORY + filename}.nc"])
-    assert os.path.isfile(f"{OUTPUT_DIRECTORY + filename}.csv")
+    result = runner.invoke(app, ["convert", f"{RESOURCES_DIRECTORY / filename}.nc"])
+    assert os.path.isfile(f"{OUTPUT_DIRECTORY / filename}.csv")
     assert result.exit_code == 0
 
 def test_conversion_file_path_ct_csv_success():
     filename = "S_NWC_CT_MSG4_MSG-N-VISIR_20230313T094500Z"
-    result = runner.invoke(app, ["convert", f"{RESOURCES_DIRECTORY + filename}.nc"])
-    assert os.path.isfile(f"{OUTPUT_DIRECTORY + filename}.csv")
+    result = runner.invoke(app, ["convert", f"{RESOURCES_DIRECTORY / filename}.nc"])
+    assert os.path.isfile(f"{OUTPUT_DIRECTORY / filename}.csv")
     assert result.exit_code == 0
