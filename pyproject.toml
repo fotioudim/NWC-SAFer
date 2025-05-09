@@ -2,7 +2,7 @@
 name = "nwc-safer"
 version = "0.8.0"
 description = "NWC-SAFer CLI tool simplifying NetCDF data extraction and conversion of NWC-SAF products."
-authors = ["dfotiou <fotioudimitris93@vodafone.com>"]
+authors = ["dfotiou <dfotiou.tech@gmail.com>"]
 readme = "docs/README_pypi.md"
 license = "MIT"
 repository = "https://github.com/fotioudim/NWC-SAFer"

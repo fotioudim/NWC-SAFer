@@ -60,7 +60,7 @@ Its aim is to simplify data extraction from NWC SAF [products](https://www.nwcsa
 
 The tech stack of this project consists of the following main technologies/frameworks/tools:
 - [![Python](https://img.shields.io/badge/python-yellow?style=for-the-badge&logo=Python)](https://www.python.org/)
-- [![Typer](https://img.shields.io/badge/typer-white.svg?style=for-the-badge&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAaCAYAAADWm14/AAAACXBIWXMAAAsSAAALEgHS3X78AAAAAXNSR0IArs4c6QAAAolJREFUSEvNlk9LalEUxddNxUglkEBQyJETBw4SEdSRjsWBItFM/QLppJFiYk0Fw4kD8QuUiIJIhfSPHEjDQBApEkcSFKUEqY99ouj1vF1vL9/rTO5kn31+e+21z7nceDwe4z8u7kcAkAjX19eoVqu4u7vDLEWZn5+Hw+GAyWSCTCYDU6BWqyEQCDCIf7GUSiU2NzcRiUReAEKhEHK5HORyOVZWVkCUs1jD4RCXl5fo9XpMgePjY3Cj0Wjs9XpRKBSg1Wqxv7+P5eXlWZyPh4cHBINBVCoVGAwGnJyc/A6g0+lwdnYGvV4/M4C1tTWUSqW/B3g1KsdxU8OSAhMB/H4/isUiSIGjo6OpWnBzc4Nmswmn04m5ubmpICYCkAkPDg5wdXUFhUIBt9sNcqnQqtfrLDabzbKvVCoV2sI88IcCX72ICMBms2FhYQEbGxtYX1+HSqX6FIIXgMah0+kIVvA+oNVqIR6Ps0uLlKPKtre3sbS0xJuH1wOvYyiK4EMw+YC8lMlkoFarJ6biBQiHwzg8PBR1fr/fR7vdfttDladSKayurvL6gbcFt7e3GAwGogAuLi7g8XhYC4xGI7a2tpgZJRKJuBaQCZ+fnzEajdhG9kBMMdtkQrvdDrPZjHQ6DavVKriPtwXRaBSnp6fMQNRDjUYjqEaj0WAmzOfznxrvfSJBE4q5ih8fH1nbPnP9xyq+FUBQogkBPxfA5/Nhb2+PybmzszOVB76iAI0uTcv5+Tl7Dcl37IckFouxW4xGit6BaR8XsRCUnyBo6lwuF8rl8gtAt9tFIpHA7u4unp6exOYVFU/F0cgmk0lYLJYXAMpAVPf39zMHoFdzcXHx7b75Gb/lojT85uBffvDaMxBMkv8AAAAASUVORK5CYII=)](https://typer.tiangolo.com/)
+- [![Typer](https://img.shields.io/badge/typer-black.svg?style=for-the-badge&logo=Typer)](https://typer.tiangolo.com/)
 - [![Poetry](https://img.shields.io/badge/poetry-blue?style=for-the-badge&logo=Poetry)](https://python-poetry.org/)
 - [![Watchdog](https://img.shields.io/badge/watchdog-darkgreen.svg?style=for-the-badge&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAMAAADzN3VRAAAAY1BMVEVHcEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADIAbxiAAAAIXRSTlMADYz0HUfm+ARNFF3I7zNSWKFseCYJPNXQu0JjgbTcma0OOkjMAAAA/ElEQVQoz51S2ZKEIAxUrojKqQje/v9XLuKozFbty+aFo5N0p6Eo/hu15LrRSnFKvu5LGzB8IgwZ4HZoO0Up5ZzPrK1fxAIqn8MMqHo4Qp7mDOb3noK9VpTYe+9lfZUtQqbVsEuXwsKvaCZFdYTUrGxHl5BKoSMI4PFmTbU9Qw9Z5WxEyLanE4cmm6QTQ8xdrj2WGWI2UkjRpQaHz7Qn0gnbi8ZkJeQkpXg+kwymGaJPUorRMOn1McVF3xfm42w82cy6NAyx+7gJEOPpOGlWWFR/d2Gt6ZQsb4X121+7Xwo/0cCU6cht+UYozH8gVrxP34j8G/T8fWtCX4t+AO8aDNkne4p2AAAAAElFTkSuQmCC)](https://github.com/gorakhargosh/watchdog)
 
@@ -184,5 +184,5 @@ Distributed under the MIT License. See `LICENSE.md` for more information.
 You can reach me at:
 - Personal website: https://www.dfotiou.gr
 - StackOverflow profile: https://stackoverflow.com/users/11680294/fotiou-d
-- Linkedin profile: https://www.linkedin.com/in/dimitris-fotiou-4141a8197/
-- Email: [fotioudimitris93@gmail.com](mailto:fotioudimitris93@gmail.com)
+- Linkedin profile: https://www.linkedin.com/in/dimitris-fotiou/
+- Email: [dfotiou.tech@gmail.com](mailto:dfotiou.tech@gmail.com)

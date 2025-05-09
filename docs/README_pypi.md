@@ -184,5 +184,5 @@ Distributed under the MIT License. See `LICENSE.md` for more information.
 You can reach me at:
 - Personal website: https://www.dfotiou.gr
 - StackOverflow profile: https://stackoverflow.com/users/11680294/fotiou-d
-- Linkedin profile: https://www.linkedin.com/in/dimitris-fotiou-4141a8197/
-- Email: [fotioudimitris93@gmail.com](mailto:fotioudimitris93@gmail.com)
+- Linkedin profile: https://www.linkedin.com/in/dimitris-fotiou/
+- Email: [dfotiou.tech@gmail.com](mailto:dfotiou.tech@gmail.com)
